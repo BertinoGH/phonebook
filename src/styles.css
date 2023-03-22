@@ -1,0 +1,24 @@
+body{
+    background-color: rgb(84, 35, 77);
+}
+h1{
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-size: 75px;
+
+}
+.note{
+    color:rgb(113, 101, 113);
+    font-size: 15px;
+    padding-top: 3px;
+}
+.error{
+    background-color: red;
+    color: white;
+    font-size: 50px;
+    text-align: center;
+    padding: 15px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+}
+
