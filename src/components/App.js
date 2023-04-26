@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Person from './Person';
 import personService from '../services/persons';
 import Notification from "./Notifications";
@@ -8,14 +8,17 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [searchTerm, setSearchTerm] = useState('');
-  const [errorMessage,setErrorMessage]=useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
   const handleNoteChange = (event) => {
     //console.log(event.target.value)
+    event.preventDefault();
     setNewName(event.target.value)
   }
   const handleNoteChange1 = (event) => {
     //console.log(event.target.value)
+    event.preventDefault();
     setNewNumber(event.target.value)
+    
 
   }
 
@@ -49,7 +52,8 @@ const App = () => {
         name: newName,
         number: newNumber,
       };
-      personService.create(personObject).then((response) => {
+      personService
+        .create(personObject).then((response) => {
         setPersons(persons.concat(response));
         setNewName("");
         setNewNumber("");
@@ -63,8 +67,8 @@ const App = () => {
 
   useEffect(() => {
     personService
-    .getAll()
-    .then(response=>{setPersons(response)})
+      .getAll()
+      
   })
 
   const deleteContact = (id) => {
@@ -74,7 +78,13 @@ const App = () => {
         .deletePerson(id)
         .then(() => {
           setPersons(persons.filter((person) => person.id !== id));
+          setErrorMessage(`Deleted ${newName}`);
+          setTimeout(() => {
+          setErrorMessage(null);
+        }, 5000);
+
         })
+        
         .catch((error) => {
           setErrorMessage(`the contact ${persons.name} was already existed`);
           setTimeout(() => {
@@ -88,8 +98,8 @@ const App = () => {
   return (
     <div>
       <h2>PhoneBook</h2>
-      <Notification message={errorMessage}/>
-      
+      <Notification message={errorMessage} />
+
       <input type="text" value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} placeholder="Search..."></input>
 
       <h2>Add</h2>
@@ -109,7 +119,7 @@ const App = () => {
 
       <ul>
         {persons.filter(person => person.name.toLowerCase().includes(searchTerm.toLowerCase())).map(person => (
-          <Person key={person.name} person={person} deleteContact={()=>deleteContact(person.id)}/>
+          <Person key={person.name} person={person} deleteContact={() => deleteContact(person.id)} />
         ))}
       </ul>
 

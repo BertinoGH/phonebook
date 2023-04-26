@@ -7,13 +7,19 @@ h1{
     font-size: 75px;
 
 }
-.note{
-    color:rgb(113, 101, 113);
-    font-size: 15px;
+
+h2{
+    color:rgb(114, 104, 104);
+    font-size: 50px;
+}
+
+.contact{
+    color:rgb(255, 255, 255);
+    font-size: 25px;
     padding-top: 3px;
 }
 .error{
-    background-color: red;
+    background-color: rgb(17, 106, 47);
     color: white;
     font-size: 50px;
     text-align: center;
